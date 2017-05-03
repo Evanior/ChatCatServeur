@@ -1,3 +1,9 @@
+.settings/
+target/
+.classpath
+.project
+.metadata/
+
 # Created by .ignore support plugin (hsz.mobi)
 ### Maven template
 target/
