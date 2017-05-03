@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.username">chatcat</property>
+        <property name="hibernate.connection.password">tilu53</property>
+        <property name="hibernate.connection.url">jdbc:mysql://10.2.6.30:3306/chatcat</property><!-- server Tim -->
+
+        <!--<property name="hibernate.dialect">org.hibernate.dialect.MySQLInnoDBDialect</property>-->
+        <property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+        <property name="show_sql">true</property>
+        <property name="connection.pool_size">5</property>
+
+<!--         <property name="transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property> -->
+        <property name="current_session_context_class">thread</property>
+        <property name="hibernate.hbm2ddl.auto">update</property>
+
+        <mapping class="fr.imie.spring.model.Message"></mapping><!-- FIXME creation des models -->
+        <mapping class="fr.imie.spring.model.User"></mapping>
+    </session-factory>
+</hibernate-configuration>
