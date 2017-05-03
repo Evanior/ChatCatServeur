@@ -11,7 +11,7 @@ import fr.imie.spring.model.AjaxResponseModel;
 public class AjaxController {
 		
 	@ResponseBody
-	@RequestMapping(name="/messages", method=RequestMethod.GET)
+	@RequestMapping(value="ajax/messages", method=RequestMethod.GET)
 	public AjaxResponseModel<Object> getToutMessages() {
 		AjaxResponseModel<Object> resp = new AjaxResponseModel<>();
 		//TODO

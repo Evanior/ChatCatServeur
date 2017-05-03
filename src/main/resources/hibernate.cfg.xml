@@ -19,6 +19,6 @@
         <property name="hibernate.hbm2ddl.auto">update</property>
 
         <mapping class="fr.imie.spring.model.Message"></mapping><!-- FIXME creation des models -->
-        <mapping class="fr.imie.spring.model.User"></mapping>
+        <!--  <mapping class="fr.imie.spring.model.User"></mapping>-->
     </session-factory>
 </hibernate-configuration>
