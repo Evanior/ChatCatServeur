@@ -1,5 +1,6 @@
 package fr.imie.spring.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -19,7 +20,10 @@ public class Message {
     private long id;
 	
     private String pseudo;
+    
+    @Column(name="date_msg")
     private String date;
+    
     private String message;
 
     Message(){//JPA ONLY

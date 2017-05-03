@@ -32,14 +32,17 @@ public class MessageController {
     public Message message(@RequestParam(value="pseudo", defaultValue="default") String pseudo,
                            @RequestParam(value="date", defaultValue="00h00") String date,
                            @RequestParam(value="message", defaultValue="Message par défaut") String message) {
-        return new Message(pseudo,
-                date,
-                message);
+    	return messageService.createMessage(pseudo, date, message);
     }
 
    @RequestMapping(value = "/message",method=GET )
    public Collection<Message> message() {
         return readMessages();
+   }
+   
+   @RequestMapping(value = "/message/pseudo/{pseudo}",method=GET )
+   public Collection<Message> message(@PathVariable("pseudo") String pseudo) {
+        return messageService.getAllMessageByPseudo(pseudo);
    }
 
 }

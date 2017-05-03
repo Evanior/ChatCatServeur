@@ -17,5 +17,24 @@ public class MessageService {
 	public Collection<Message> findAllMessage() {
 		return messageDAO.getAllMessage();
 	}
+	
+	public Collection<Message> getAllMessageByPseudo(String pseudo) {
+		return messageDAO.getAllMessageByPseudo(pseudo);
+	}
+	
+	public Collection<Message> getAllMessageByDate(String date) {
+		return messageDAO.getAllMessageByDate(date);
+	}
+
+	public Message getMessageById(long id) {
+		return messageDAO.getMessageById(id);
+	}
+	
+	public Message createMessage(String pseudo, String date, String msg){
+		//TODO verification
+		Message m = new Message(pseudo, date, msg);
+		messageDAO.createNewMessage(m);
+		return m;
+	}
 
 }
