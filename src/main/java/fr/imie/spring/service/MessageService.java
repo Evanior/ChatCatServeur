@@ -36,5 +36,9 @@ public class MessageService {
 		messageDAO.createNewMessage(m);
 		return m;
 	}
+	
+	public void deleteMessage(long id){
+		messageDAO.deleteMessage(messageDAO.getMessageById(id));
+	}
 
 }

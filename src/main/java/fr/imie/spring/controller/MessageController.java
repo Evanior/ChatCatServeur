@@ -28,11 +28,16 @@ public class MessageController {
         return this.messageService.findAllMessage();
     }
 
-    @RequestMapping(value = "/message",method=POST)
+    @RequestMapping(value = "/message",method=RequestMethod.POST)
     public Message message(@RequestParam(value="pseudo", defaultValue="default") String pseudo,
                            @RequestParam(value="date", defaultValue="00h00") String date,
                            @RequestParam(value="message", defaultValue="Message par défaut") String message) {
     	return messageService.createMessage(pseudo, date, message);
+    }
+    
+    @RequestMapping(value = "/message",method=RequestMethod.DELETE)
+    public void messageDelete(@RequestParam(value="id") long id) {
+    	messageService.deleteMessage(id);
     }
 
    @RequestMapping(value = "/message",method=GET )
@@ -41,8 +46,13 @@ public class MessageController {
    }
    
    @RequestMapping(value = "/message/pseudo/{pseudo}",method=GET )
-   public Collection<Message> message(@PathVariable("pseudo") String pseudo) {
+   public Collection<Message> messageByPseudo(@PathVariable("pseudo") String pseudo) {
         return messageService.getAllMessageByPseudo(pseudo);
+   }
+   
+   @RequestMapping(value = "/message/id/{id}",method=GET )
+   public Message messageById(@PathVariable("id") long id) {
+        return messageService.getMessageById(id);
    }
 
 }

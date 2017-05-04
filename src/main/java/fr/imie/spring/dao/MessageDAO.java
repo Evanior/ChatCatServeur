@@ -49,4 +49,9 @@ public class MessageDAO {
 		em.persist(m);
 	}
 	
+	@Transactional
+	public void deleteMessage(Message m){
+		em.remove(m);
+	}
+	
 }
