@@ -23,14 +23,9 @@ public class MessageController {
     @Autowired
     private MessageService messageService;
 
-    @RequestMapping(method = RequestMethod.GET)
-    Collection<Message> readMessages() {
-        return this.messageService.findAllMessage();
-    }
-
     @RequestMapping(value = "/message",method=RequestMethod.POST)
     public Message message(@RequestParam(value="pseudo", defaultValue="default") String pseudo,
-                           @RequestParam(value="date", defaultValue="00h00") String date,
+                           @RequestParam(value="date", defaultValue="01/01/1970 00:00") String date,
                            @RequestParam(value="message", defaultValue="Message par défaut") String message) {
     	return messageService.createMessage(pseudo, date, message);
     }
@@ -42,7 +37,7 @@ public class MessageController {
 
    @RequestMapping(value = "/message",method=GET )
    public Collection<Message> message() {
-        return readMessages();
+        return messageService.findAllMessage();
    }
    
    @RequestMapping(value = "/message/pseudo/{pseudo}",method=GET )
@@ -51,7 +46,7 @@ public class MessageController {
    }
    
    @RequestMapping(value = "/message/id/{id}",method=GET )
-   public Message messageById(@PathVariable("id") long id) {
+   public Message messageById(@PathVariable("id") long id) {//FIXME
         return messageService.getMessageById(id);
    }
 

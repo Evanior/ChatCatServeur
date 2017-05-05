@@ -31,7 +31,7 @@ public class MessageDAO {
 	}
 	
 	public List<Message> getAllMessageByDate(String date){
-		String query = "select * from message where date_msg = :date";
+		String query = "select * from message where date_msg = :date order by id asc";
 		Query q = em.createNativeQuery(query);
 		q.setParameter("date", date);
 		return q.getResultList();
