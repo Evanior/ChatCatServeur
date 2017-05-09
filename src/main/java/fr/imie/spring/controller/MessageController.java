@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 import fr.imie.spring.model.Message;
 import fr.imie.spring.service.MessageService;
 
+import java.text.ParseException;
 import java.util.Collection;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -27,7 +28,13 @@ public class MessageController {
     public Message message(@RequestParam(value="pseudo", defaultValue="default") String pseudo,
                            @RequestParam(value="date", defaultValue="01/01/1970 00:00") String date,
                            @RequestParam(value="message", defaultValue="Message par défaut") String message) {
-    	return messageService.createMessage(pseudo, date, message);
+    	Message m;
+    	try {
+    		m = messageService.createMessage(pseudo, date, message);
+    	}catch(ParseException e){
+    		m = new Message("Error date","01/01/1970 00:00","Mauvais format -_-'");
+    	}
+    	return m;
     }
     
     @RequestMapping(value = "/message",method=RequestMethod.DELETE)

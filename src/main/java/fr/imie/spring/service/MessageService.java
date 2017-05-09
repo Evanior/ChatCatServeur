@@ -1,5 +1,7 @@
 package fr.imie.spring.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,10 +32,13 @@ public class MessageService {
 		return messageDAO.getMessageById(id);
 	}
 	
-	public Message createMessage(String pseudo, String date, String msg){
+	public Message createMessage(String pseudo, String date, String msg) throws ParseException{
 		//TODO verification
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		Message m = new Message(pseudo, date, msg);
-		messageDAO.createNewMessage(m);
+		if(format.parse(date).getTime() > 1){
+			messageDAO.createNewMessage(m);		
+		}
 		return m;
 	}
 	
