@@ -33,6 +33,12 @@ public class Message {
         this.date = date;
         this.message = message;
     }
+    public Message(long id, String pseudo, String date, String message) {
+        this.pseudo = pseudo;
+        this.date = date;
+        this.message = message;
+        this.id = id;
+    }
     public long getId() {
         return id;
     }

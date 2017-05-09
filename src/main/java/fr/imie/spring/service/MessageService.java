@@ -32,18 +32,21 @@ public class MessageService {
 		return messageDAO.getMessageById(id);
 	}
 	
-	public Message createMessage(String pseudo, String date, String msg) throws ParseException{
-		//TODO verification
+	public Message createMessage(String pseudo, String date, String msg) throws ParseException, Exception{
 		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 		Message m = new Message(pseudo, date, msg);
-		if(format.parse(date).getTime() > 1){
+		if(msg.equals("")){
+			throw new Exception();
+		}
+		if(format.parse(date).getTime() > 10000){
 			messageDAO.createNewMessage(m);		
 		}
 		return m;
 	}
 	
 	public void deleteMessage(long id){
-		messageDAO.deleteMessage(messageDAO.getMessageById(id));
+		Message m = getMessageById(id);
+		messageDAO.deleteMessage(m);
 	}
 
 }

@@ -27,18 +27,20 @@ public class MessageController {
     @RequestMapping(value = "/message",method=RequestMethod.POST)
     public Message message(@RequestParam(value="pseudo", defaultValue="default") String pseudo,
                            @RequestParam(value="date", defaultValue="01/01/1970 00:00") String date,
-                           @RequestParam(value="message", defaultValue="Message par défaut") String message) {
+                           @RequestParam(value="message", defaultValue="") String message) {
     	Message m;
     	try {
     		m = messageService.createMessage(pseudo, date, message);
     	}catch(ParseException e){
-    		m = new Message("Error date","01/01/1970 00:00","Mauvais format -_-'");
+    		m = new Message("Error date", "01/01/1970 00:00", "Mauvais format -_-'");
+    	}catch(Exception e){
+    		m = new Message("Error message", "01/01/1970 00:00", "Message vide -_-'");
     	}
     	return m;
     }
     
-    @RequestMapping(value = "/message",method=RequestMethod.DELETE)
-    public void messageDelete(@RequestParam(value="id") long id) {
+    @RequestMapping(value = "/message/{id}",method=RequestMethod.DELETE)
+    public void messageDelete(@PathVariable(value="id") long id) {
     	messageService.deleteMessage(id);
     }
 
@@ -52,7 +54,7 @@ public class MessageController {
         return messageService.getAllMessageByPseudo(pseudo);
    }
    
-   @RequestMapping(value = "/message/id/{id}",method=GET )
+   @RequestMapping(value = "/message/{id}",method=GET )
    public Message messageById(@PathVariable("id") long id) {//FIXME
         return messageService.getMessageById(id);
    }
