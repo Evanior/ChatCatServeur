@@ -49,4 +49,11 @@ public class MessageService {
 		messageDAO.deleteMessage(m);
 	}
 
+	public Message updateMessageById(long id, String message) {
+		Message m = getMessageById(id);
+		m.setMessage(message);
+		messageDAO.updateMessage(m);
+		return m;
+	}
+
 }

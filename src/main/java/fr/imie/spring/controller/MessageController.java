@@ -43,6 +43,17 @@ public class MessageController {
     	return new Message("Serveur", "01/01/1970 00:00", "Message n°"+id+" supprimer");
     }
 
+    @RequestMapping(value = "/message/{id}",method=RequestMethod.GET )
+    public Message messageById(@PathVariable("id") long id ) {
+    	return messageService.getMessageById(id);
+    }
+    
+    @RequestMapping(value = "/message/{id}",method=RequestMethod.PUT )
+    public Message updateMessageById(@PathVariable("id") long id,
+			   						 @RequestParam(value="message", defaultValue="") String message) {
+    	return messageService.updateMessageById(id, message);
+    }
+    
    @RequestMapping(value = "/message",method=RequestMethod.GET )
    public Collection<Message> message() {
         return messageService.findAllMessage();
@@ -53,9 +64,5 @@ public class MessageController {
         return messageService.getAllMessageByPseudo(pseudo);
    }
    
-   @RequestMapping(value = "/message/{id}",method=RequestMethod.GET )
-   public Message messageById(@PathVariable("id") long id) {
-        return messageService.getMessageById(id);
-   }
 
 }

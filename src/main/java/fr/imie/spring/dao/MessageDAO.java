@@ -63,5 +63,10 @@ public class MessageDAO {
 	public void deleteMessage(Message m){
 		em.remove(em.contains(m) ? m : em.merge(m));
 	}
+
+	@Transactional
+	public void updateMessage(Message m) {
+		em.persist(em.merge(m));
+	}
 	
 }
