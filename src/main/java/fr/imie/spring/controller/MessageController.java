@@ -10,8 +10,6 @@ import java.text.ParseException;
 import java.util.Collection;
 import java.util.concurrent.atomic.AtomicLong;
 
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
-import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 /**
  * Created by Quentin on 31/03/2017.
@@ -40,22 +38,23 @@ public class MessageController {
     }
     
     @RequestMapping(value = "/message/{id}",method=RequestMethod.DELETE)
-    public void messageDelete(@PathVariable(value="id") long id) {
+    public Message messageDelete(@PathVariable(value="id") long id) {
     	messageService.deleteMessage(id);
+    	return new Message("Serveur", "01/01/1970 00:00", "Message n°"+id+" supprimer");
     }
 
-   @RequestMapping(value = "/message",method=GET )
+   @RequestMapping(value = "/message",method=RequestMethod.GET )
    public Collection<Message> message() {
         return messageService.findAllMessage();
    }
    
-   @RequestMapping(value = "/message/pseudo/{pseudo}",method=GET )
+   @RequestMapping(value = "/message/pseudo/{pseudo}",method=RequestMethod.GET )
    public Collection<Message> messageByPseudo(@PathVariable("pseudo") String pseudo) {
         return messageService.getAllMessageByPseudo(pseudo);
    }
    
-   @RequestMapping(value = "/message/{id}",method=GET )
-   public Message messageById(@PathVariable("id") long id) {//FIXME
+   @RequestMapping(value = "/message/{id}",method=RequestMethod.GET )
+   public Message messageById(@PathVariable("id") long id) {
         return messageService.getMessageById(id);
    }
 
